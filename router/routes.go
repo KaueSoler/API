@@ -1,8 +1,7 @@
 package router
 
 import (
-	"net/http"
-
+	"github.com/KaueSoler/api/handler"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,25 +9,12 @@ func InitializeRouter(router *gin.Engine) {
 	// Definition
 	version1 := router.Group("/api/version1")
 	{
-		version1.GET("/GET", func(structure *gin.Context) {
-			structure.JSON(http.StatusOK, gin.H{
-				"message": "Success GET",
-			})
-		})
-		version1.POST("/POST", func(structure *gin.Context) {
-			structure.JSON(http.StatusOK, gin.H{
-				"message": "Success POST",
-			})
-		})
-		version1.DELETE("/DELETE", func(structure *gin.Context) {
-			structure.JSON(http.StatusOK, gin.H{
-				"message": "Success DELETE",
-			})
-		})
-		version1.PUT("/PUT", func(structure *gin.Context) {
-			structure.JSON(http.StatusOK, gin.H{
-				"message": "Success PUT",
-			})
-		})
+		version1.GET("/GET", handler.ShowApiHandler)
+
+		version1.POST("/POST", handler.CreateApiHandler)
+
+		version1.DELETE("/DELETE", handler.DeleteApiHandler)
+
+		version1.PUT("/PUT", handler.UpdateApiHandler)
 	}
 }
